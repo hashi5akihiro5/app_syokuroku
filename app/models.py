@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils.timezone import now
+import datetime
+
 
 
 # プロフィール
@@ -12,7 +13,7 @@ class Profile(models.Model):
                                     default=0,
                                     )
     target = models.TextField('目標', max_length=300)
-    created = models.DateTimeField('作成日')
+    created = models.DateField('作成日', default=datetime.date.today)
     twitter = models.CharField('twitter', max_length=100, null=True, blank=True)
     facebook = models.CharField('facebook', max_length=100, null=True, blank=True)
     instagram = models.CharField('instagram', max_length=100, null=True, blank=True)
@@ -25,7 +26,7 @@ class Profile(models.Model):
 # 親カテゴリー
 # カテゴリー種類:主食・副食・飲み物
 class ParentCategory(models.Model):
-    name = models.CharField(verbose_name='親カテゴリー', max_length=100)
+    name = models.CharField(verbose_name='主食・副食・飲み物', max_length=100)
 
     def __str__(self):
         return self.name
@@ -33,21 +34,24 @@ class ParentCategory(models.Model):
 # 子カテゴリー
 # 主食
 class MainCategory(models.Model):
-    name = models.CharField('主食', max_length=100)
+    name = models.CharField(verbose_name='主食', max_length=100)
+    parent = models.ForeignKey(ParentCategory, verbose_name='主食・副食・飲み物', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 # 副食
 class SubCategory(models.Model):
-    name = models.CharField('副食', max_length=100)
+    name = models.CharField(verbose_name='副食', max_length=100)
+    parent = models.ForeignKey(ParentCategory, verbose_name='主食・副食・飲み物', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
 # 飲み物
 class DrinkCategory(models.Model):
-    name = models.CharField('飲み物', max_length=100)
+    name = models.CharField(verbose_name='飲み物', max_length=100)
+    parent = models.ForeignKey(ParentCategory, verbose_name='主食・副食・飲み物', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
