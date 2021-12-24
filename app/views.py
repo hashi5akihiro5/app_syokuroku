@@ -1,7 +1,9 @@
-from django.views.generic import View
-from django.shortcuts import render, redirect
-from .models import Profile
-from .forms import ParentCategoryForm, MainCategoryForm, SubCategory, DrinkCategory
+from django.shortcuts import render
+from django.views import generic, View
+from django.shortcuts import resolve_url
+
+from .models import *
+from .forms import *
 
 
 
@@ -10,14 +12,28 @@ class IndexView(View):
         profile_data = Profile.objects.all()
         self.params = {
             'profile_data': profile_data.order_by("-id")[0],
-            'parentcategoryform': ParentCategoryForm(),
-            'maincategoryform': MainCategoryForm(),
+            #'parentcategoryform': ParentCategoryForm(),
+            #'maincategoryform': MainCategoryForm(),
             'subcategory': SubCategory(),
             'drinkcategory': DrinkCategory()
         }
 
     def get(self, request):
         return render(request, 'app/index.html', self.params)
+
+
+class MuneCreateView(generic.CreateView):
+    model = Post
+    form_class = MuneCreateForm
+    success_url = '/'# reverse_lazy等のほうが良い。これは手抜き
+
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['parent_categorys'] = ParentCategory.objects.all()
+        return context
+
+    # def get_success_url(self):
+    #     return resolve_url('apps:index', pk=self.object.pk)
 
 
 # class PostCreate(generic.CreateView):

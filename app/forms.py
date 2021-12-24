@@ -1,24 +1,36 @@
 from django import forms
-from .models import ParentCategory, MainCategory, SubCategory, DrinkCategory
-
-# 親カテゴリー
-# カテゴリー種類:主食・副食・飲み物
-class ParentCategoryForm(forms.Form):
-    choice = forms.ModelChoiceField(queryset=ParentCategory.objects, label="主食・副食・飲み物")
-    # class Meta:
-    #     model = ParentCategory
-    #     fields = ['name']
+from .models import *
 
 
-# 子カテゴリー
-# 主食
-class MainCategoryForm(forms.Form):
-    choice = forms.ModelChoiceField(queryset=MainCategory.objects, label="主食")
+class MuneCreateForm(forms.ModelForm):
+    # 親カテゴリー:主食・副食・飲み物
+    parent_category = forms.ModelChoiceField(
+        label="主食・副食・飲み物",
+        queryset=ParentCategory.objects,
+        required=False
+    )
 
-# 副食
-class SubCategory(forms.Form):
-    choice = forms.ModelChoiceField(queryset=SubCategory.objects, label="副食")
+    class Meta:
+        model = Post
+        fields = '__all__'
 
-# 飲み物
-class DrinkCategory(forms.Form):
-    choice = forms.ModelChoiceField(queryset=DrinkCategory.objects, label="飲み物")
+    field_order = ('parent_category', 'main_category', 'sub_category', 'drink_category')
+
+
+# # 子カテゴリー
+# # 主食
+# class MainCategoryForm(forms.Form):
+#     choice = forms.ModelChoiceField(queryset=MainCategory.objects, label=MainCategory.objects)
+    
+#     class Meta:
+#         model = ParentCategory
+#         fields = ['name']
+
+
+# # 副食
+# class SubCategory(forms.Form):
+#     choice = forms.ModelChoiceField(queryset=SubCategory.objects, label="副食")
+
+# # 飲み物
+# class DrinkCategory(forms.Form):
+#     choice = forms.ModelChoiceField(queryset=DrinkCategory.objects, label="飲み物")

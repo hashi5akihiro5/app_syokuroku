@@ -57,9 +57,11 @@ class DrinkCategory(models.Model):
         return self.name
 
 
-# class Post(models.Model):
-#     meal_no = models.CharField('食事_No.', max_length=255)
-#     category = models.ForeignKey(MainCategory, verbose_name='メニュー名', on_delete=models.CASCADE)
+class Post(models.Model):
+    title = models.CharField('タイトル', max_length=255)
+    main_category = models.ForeignKey(MainCategory, verbose_name='主食', on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(SubCategory, verbose_name='副食', on_delete=models.CASCADE)
+    drink_category = models.ForeignKey(DrinkCategory, verbose_name='飲み物', on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.meal_no
+    def __str__(self):
+        return self.title
