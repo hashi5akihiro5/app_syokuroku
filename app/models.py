@@ -1,5 +1,7 @@
 from django.db import models
 import datetime
+from django.utils import timezone
+
 
 
 
@@ -58,10 +60,11 @@ class DrinkCategory(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField('タイトル', max_length=255)
+    date = models.DateField('作成日', default=datetime.date.today)
+    time = models.TimeField('作成時間', default=timezone.datetime.now())
     main_category = models.ForeignKey(MainCategory, verbose_name='主食', on_delete=models.CASCADE)
     sub_category = models.ForeignKey(SubCategory, verbose_name='副食', on_delete=models.CASCADE)
     drink_category = models.ForeignKey(DrinkCategory, verbose_name='飲み物', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.meals

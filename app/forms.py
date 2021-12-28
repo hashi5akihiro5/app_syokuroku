@@ -1,20 +1,22 @@
 from django import forms
 from .models import *
 
+# Register
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
 
+# MuneCount
+class MuneCountForm(forms.Form):
+    data = list((x, x) for x in range(1, 6))
+    counts = forms.ChoiceField(label="食事回数", choices=data)
+
+# Mune
 class MuneCreateForm(forms.ModelForm):
-    # 親カテゴリー:主食・副食・飲み物
-    parent_category = forms.ModelChoiceField(
-        label="主食・副食・飲み物",
-        queryset=ParentCategory.objects,
-        required=False
-    )
-
     class Meta:
         model = Post
         fields = '__all__'
-
-    field_order = ('parent_category', 'main_category', 'sub_category', 'drink_category')
 
 
 # # 子カテゴリー
