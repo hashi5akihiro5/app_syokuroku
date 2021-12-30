@@ -9,7 +9,13 @@ class RegisterForm(forms.ModelForm):
 
 # MuneCount
 class MuneCountForm(forms.Form):
-    data = list((x, x) for x in range(1, 6))
+    data = [
+        (1, "1 食"),
+        (2, "2 食"),
+        (3, "3 食"),
+        (4, "4 食"),
+        (5, "5 食"),
+    ]
     counts = forms.ChoiceField(label="食事回数", choices=data)
 
 # Mune
