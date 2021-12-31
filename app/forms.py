@@ -7,7 +7,16 @@ class RegisterForm(forms.ModelForm):
         model = Profile
         fields = '__all__'
 
-# MuneCount
+# kcal_Select
+class KcalSelectForm(forms.Form):
+    data = [
+        (1, "500 Kcal"),
+        (2, "1000 Kcal"),
+        (3, "2000 Kcal"),
+    ]
+    counts = forms.ChoiceField(label="摂取カロリー", choices=data)
+
+# Mune_Count
 class MuneCountForm(forms.Form):
     data = [
         (1, "1 食"),

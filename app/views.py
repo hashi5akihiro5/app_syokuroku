@@ -12,6 +12,7 @@ class IndexView(View):
         profile_data = Profile.objects.all()
         self.params = {
             'profile_data': profile_data.order_by("-id")[0],
+            'kcalselectform': KcalSelectForm(),
             'munecountform': MuneCountForm(),
             'form': MuneCreateForm(),
         }
@@ -21,6 +22,7 @@ class IndexView(View):
 
     def post(self, request):
         munecount = request.POST['counts']
+
 # Register
 def register(request):
     if (request.method == 'POST'):
