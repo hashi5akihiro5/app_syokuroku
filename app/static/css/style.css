@@ -1,52 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: #f1f1f1;
-    display: flex;
-    flex-flow: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1;
-}
-
 /* navbar */
-
-.navbar-nav {
-    flex-direction: row !important;
-}
-
-.nav-color {
-    color: black;
-}
-
-.nav-color:hover {
-    color: #ee6c4d;
-}
-
-.nav-color:after {
-    content: "";
-    display: block;
-    height: 2px;
-    background: #ee6c4d;
-    margin-top: 6px;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: all 0.3s ease-in-out;
-}
-
-.nav-color:hover:after {
-    transform: translateY(0px);
-    opacity: 1;
-}
-
-/* sidebar */
-
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 :root {
@@ -63,7 +15,7 @@ main {
 *,
 ::before,
 ::after {
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body {
@@ -98,6 +50,32 @@ a {
     color: var(--first-color);
     font-size: 1.5rem;
     cursor: pointer
+}
+
+/* 食録_navbar 効いていない*/
+
+.navbar-nav {
+    flex-direction: row !important;
+}
+
+.nav-color:hover {
+    color: #ee6c4d;
+}
+
+.nav-color:after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: #ee6c4d;
+    margin-top: 6px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-color:hover:after {
+    transform: translateY(0px);
+    opacity: 1;
 }
 
 
@@ -217,7 +195,6 @@ a {
         padding-left: calc(var(--nav-width) + 188px)
     }
 }
-
 
 /* index */
 
