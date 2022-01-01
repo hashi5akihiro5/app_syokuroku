@@ -13,7 +13,6 @@ class IndexView(View):
         self.params = {
             'profile_data': profile_data.order_by("-id")[0],
             'kcalselectform': KcalSelectForm(),
-            'munecountform': MuneCountForm(),
             'form': MuneCreateForm(),
         }
 

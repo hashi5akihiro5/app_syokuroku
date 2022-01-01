@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Profile, ParentCategory, MainCategory, SubCategory, DrinkCategory
+from .models import *
 
 admin.site.register(Profile)
+admin.site.register(MuneCount)
 admin.site.register(ParentCategory)
 admin.site.register(MainCategory)
 admin.site.register(SubCategory)

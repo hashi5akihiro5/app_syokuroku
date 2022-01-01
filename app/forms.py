@@ -16,17 +16,6 @@ class KcalSelectForm(forms.Form):
     ]
     counts = forms.ChoiceField(label="摂取カロリー", choices=data)
 
-# Mune_Count
-class MuneCountForm(forms.Form):
-    data = [
-        (1, "1 食"),
-        (2, "2 食"),
-        (3, "3 食"),
-        (4, "4 食"),
-        (5, "5 食"),
-    ]
-    counts = forms.ChoiceField(label="食事回数", choices=data)
-
 # Mune
 class MuneCreateForm(forms.ModelForm):
     class Meta:
