@@ -17,6 +17,7 @@
         <title>SyokuRoku</title>
     </head>
     <body id="body-pd">
+        <!-- ヘッダー -->
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
             <a class="navbar-brand col-8" href="/"><h3 class="" href="#">食 録</h3></a>
@@ -33,7 +34,7 @@
                     </div>
                 </ul>
         </header>
-        <!-- サイドバー -->
+        <!-- leftサイドメニュー -->
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div> 
@@ -74,10 +75,15 @@
                 </a>
             </nav>
         </div>
-        <div class="container-fluid">
-            <main class="col-md-auto ml-sm-auto col-lg-auto px-md-4 py-4">
+        <div class="container">
+            <!-- main コンテナ -->
+            <main class="main-contents col-md-auto ml-sm-auto col-lg-auto px-md-4 py-4">
                 {% block content %}{% endblock %}
             </main>
+            <!-- rightサイドメニュー -->
+            <div class="rightside-menu">
+                サイドメニュー
+            </div>
         </div>
         <!-- フッター -->
         <footer class="py-4 bg-dark text-center">

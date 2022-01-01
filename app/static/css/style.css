@@ -196,6 +196,28 @@ a {
     }
 }
 
+/* main_container */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* main */
+.main-contents {
+    width: 80%;
+    padding: 10px;
+    background-color: #ccc;
+}
+
+/* 右側サイドメニュー */
+.rightside-menu {
+    width: 20%;
+    padding: 10px;
+    background-color: #faa;
+}
+
 /* index */
 
 .top img {
