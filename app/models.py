@@ -25,6 +25,13 @@ class Profile(models.Model):
     def __str__(self):
         return self.name
 
+# 食事回数
+class MuneCount(models.Model):
+    counts = models.CharField('食事回数', max_length=100)
+
+    def __str__(self):
+        return self.counts
+
 # 親カテゴリー
 # カテゴリー種類:主食・副食・飲み物
 class ParentCategory(models.Model):
@@ -62,9 +69,7 @@ class DrinkCategory(models.Model):
 class Post(models.Model):
     date = models.DateField('作成日', default=datetime.date.today)
     time = models.TimeField('作成時間', default=timezone.datetime.now())
+    count = models.ForeignKey(MuneCount, verbose_name='食事回数', on_delete=models.CASCADE)
     main_category = models.ForeignKey(MainCategory, verbose_name='主食', on_delete=models.CASCADE)
     sub_category = models.ForeignKey(SubCategory, verbose_name='副食', on_delete=models.CASCADE)
     drink_category = models.ForeignKey(DrinkCategory, verbose_name='飲み物', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.meals
