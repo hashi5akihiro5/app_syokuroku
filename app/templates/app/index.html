@@ -26,11 +26,11 @@
             <!-- 食事内容 -->
             <!-- <div class="row" id="form-area"> -->
                 <form action="{% url 'index' %}" method="post" id="form">
-                    {% csrf_token %}
-                    {{ form.management_form }}
                     <div class="text">
-                        {{ form.empty_form.as_p }}
+                        {{ form.as_p }}
                     </div>
+                    {{ formset.management_form }}
+                    {% csrf_token %}
                     <!-- <table>{{ form.as_table }}</table> -->
                     <button type="submit" class="btn btn-primary">送信</button>
                     <button type="button" class="btn btn-primary" id="btn-clone">追加</button>

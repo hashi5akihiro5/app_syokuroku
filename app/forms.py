@@ -23,6 +23,12 @@ class MuneCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
+# モデルフォームセット
+PostCreateFormSet = forms.modelformset_factory(
+    Post, form=MuneCreateForm, extra=0
+)
+
+
 # # 子カテゴリー
 # # 主食
 # class MainCategoryForm(forms.Form):
