@@ -1,7 +1,5 @@
-from django.forms import fields
 from django.shortcuts import redirect, render
-from django.views import generic, View
-from django.shortcuts import resolve_url
+from django.views import View
 
 from .models import *
 from .forms import *
@@ -10,19 +8,21 @@ from .forms import *
 class IndexView(View):
     def __init__(self):
         profile_data = Profile.objects.all()
-        formset = PostCreateFormSet()
         self.params = {
             'profile_data': profile_data.order_by("-id")[0],
             'kcalselectform': KcalSelectForm(),
             'form': MuneCreateForm(),
-            'formset': formset
+            'formset': PostCreateFormSet()
         }
 
     def get(self, request):
         return render(request, 'app/index.html', self.params)
 
     def post(self, request):
-        munecount = request.POST['counts']
+        # self.params['kcalselectform'] = KcalSelectForm(request.POST)
+        # self.params['form'] = MuneCreateForm(request.POST)
+        # self.params['formset'] = PostCreateFormSet(request.POST)
+        return render(request, 'app/index.html', self.params)
 
 # Register
 def register(request):

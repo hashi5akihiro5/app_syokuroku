@@ -2,9 +2,6 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
-
-
-
 # プロフィール
 class Profile(models.Model):
     name = models.CharField('名前', max_length=100)

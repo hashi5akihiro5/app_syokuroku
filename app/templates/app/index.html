@@ -1,74 +1,73 @@
-{% extends "app/base.html" %}
+{% extends "./base.html" %}
 {% block content %}
-<div class="row">
-    <h1 class="concept">食は運命を左右する</h1>
-</div>
-<div class="row">
-    <p class="target">{{ profile_data.name }}さんの目標: <span class="fs-1">{{ profile_data.target }}</span></p>
-</div>
-<div class="row p-5">
-    <p class="target">１日の摂取カロリー選択</p>
-    <form action="{% url 'index' %}" method="post">
-        {% csrf_token %}
-        <table>{{ kcalselectform.as_table }}</table>
-    </form>
-</div>
-<div class="d-flex justify-content-center">
-    <div class="circle"><div class="circle-inner">摂取カロリー</div></div>
-</div>
-<div class="row bg-warning">
-    <h1>・本日の食事</h1>
-</div>
-<div class="row bg-info">
     <div class="row">
-        <!-- 選択・リスト形式にする　gも一緒 -->
-        <div class="row mb-3">
-            <!-- 食事内容 -->
-            <!-- <div class="row" id="form-area"> -->
-                <form action="{% url 'index' %}" method="post" id="form">
-                    <div class="text">
-                        {{ form.as_p }}
-                    </div>
-                    {{ formset.management_form }}
-                    {% csrf_token %}
-                    <!-- <table>{{ form.as_table }}</table> -->
-                    <button type="submit" class="btn btn-primary">送信</button>
-                    <button type="button" class="btn btn-primary" id="btn-clone">追加</button>
-                </form>
-            <!-- </div> -->
+        <h1 class="concept">食は運命を左右する</h1>
+    </div>
+    <div class="row">
+        <p class="target">{{ profile_data.name }}さんの目標: <span class="fs-1">{{ profile_data.target }}</span></p>
+    </div>
+    <div class="row p-5">
+        <p class="target">１日の摂取カロリー選択</p>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <table>{{ kcalselectform.as_table }}</table>
+        </form>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="circle"><div class="circle-inner">摂取カロリー</div></div>
+    </div>
+    <div class="row bg-warning">
+        <h1>・本日の食事</h1>
+    </div>
+    <div class="row bg-info">
+        <div class="row">
+            <!-- 選択・リスト形式にする　gも一緒 -->
+            <div class="row mb-3">
+                <!-- 食事内容 -->
+                <div class="row" id="form-area">
+                    <form action="{% url 'index' %}" method="post" id="form">
+                        <div class="text">
+                            {{ form.as_p }}
+                        </div>
+                        {{ formset.management_form }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">送信</button>
+                        <button type="button" class="btn btn-primary" id="btn-clone">追加</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block extrajs %}
 <script>
-$(function() {
-    //button
-    const btn_clone = $('#btn-clone'); // 追加ボタン
+    $(function() {
+        //button
+        const btn_clone = $('#btn-clone'); // 追加ボタン
 
-    // 追加ボタン
-    $('#btn-clone').click(function() {
-        var text = $('.text').last(); // 最後尾にあるinput
-        clone = text.clone().insertAfter(text); // inputを最後尾に追加
-        clone.find("input[type='text']").val(''); // valueもクローンされるので削除する
-    });
+        // 追加ボタン
+        $('#btn-clone').click(function() {
+            var text = $('.text').last(); // 最後尾にあるinput
+            clone = text.clone().insertAfter(text); // inputを最後尾に追加
+            clone.find("input[type='text']").val(''); // valueもクローンされるので削除する
+        });
 
-    // ここからDjango用のidなどを操作する
-    $('#form').submit(function(){  //フォームを送信する直前
+        // ここからDjango用のidなどを操作する
+        $('#form').submit(function(){  //フォームを送信する直前
 
-        // フォームの入力欄の数を指定する
-        const text = $('.text');
-        $('[name=form-TOTAL_FORMS]').val(text.length);
+            // フォームの入力欄の数を指定する
+            const text = $('.text');
+            $('[name=form-TOTAL_FORMS]').val(text.length);
 
-        // それぞれの入力欄の__prefix__をindexで置換する
-        text.each(function(index, element){
-            html = $(element).html().replace(/__prefix__/g, index);
-            value = $(element).find("input[type='text']").val(); // valueが消えるので保存しておく
-            $(element).html(html);
-            $(element).find("input[type='text']").val(value);
+            // それぞれの入力欄の__prefix__をindexで置換する
+            text.each(function(index, element){
+                html = $(element).html().replace(/__prefix__/g, index);
+                value = $(element).find("input[type='text']").val(); // valueが消えるので保存しておく
+                $(element).html(html);
+                $(element).find("input[type='text']").val(value);
+            });
         });
     });
-});
 </script>
 {% endblock %}

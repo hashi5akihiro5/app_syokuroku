@@ -218,29 +218,11 @@ a {
     background-color: #faa;
 }
 
-/* index */
-
-.top img {
-    object-fit: cover;
-    height: 500px;
-}
-
-.overlay {
-    position: absolute;
-}
-
+/* index.html */
 .concept {
     font-family: 'Zen Old Mincho', serif;
     font-size: 4rem;
     border-bottom:0.2rem solid #ffc107;
-}
-
-.title {
-    font-size: 4rem;
-}
-
-.subtitle {
-    font-size: 2rem;
 }
 
 /* １日カロリープログレスバー */
