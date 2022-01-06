@@ -1,7 +1,5 @@
 from django.shortcuts import redirect, render
 from django.views import View
-#from filer.models import mixins
-#from .models import Schedule
 from .models import *
 from .forms import *
 
@@ -36,16 +34,4 @@ def register(request):
         'form': RegisterForm(),
     }
     return render(request, 'app/register.html', params)
-
-
-# MyCalendar
-# class MyCalendar(mixins.MonthCalendarMixin):
-#     model = Schedule
-#     date_filed = 'date'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         month_calendar_context = self.get_month_calendar()
-#         context.update(month_calendar_context)
-#         return context
 
