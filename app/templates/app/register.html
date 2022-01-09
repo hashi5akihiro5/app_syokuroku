@@ -1,13 +1,16 @@
 {% extends "./base.html" %}
 {% block content %}
-    <h1>ユーザー登録</h1>
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <table>{{ form.as_table }}</table>
-        <button type="submit">save</button>
-    </form>
-
-    <div>
+<div class="main">
+    <div class="row">
+        <h1>ユーザー登録</h1>
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <table>{{ form.as_table }}</table>
+            <button type="submit">save</button>
+        </form>
+    </div>
+    <div class="row">
         <a href="JavaScript:history.back()">&lt; 戻る</a>
     </div>
+</div>
 {% endblock %}

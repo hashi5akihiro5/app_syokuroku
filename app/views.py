@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from .models import *
 from .forms import *
-from .mixins import BaseCalendarMixin, MonthCalendarMixin
+from .mixins import MonthCalendarMixin
 
 
 class IndexView(View):
