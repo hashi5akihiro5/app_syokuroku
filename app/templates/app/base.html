@@ -76,14 +76,7 @@
             </nav>
         </div>
         <div class="container">
-            <!-- main コンテナ -->
-            <main class="main-contents col-md-auto ml-sm-auto col-lg-auto px-md-4 py-4">
-                {% block content %}{% endblock %}
-            </main>
-            <!-- rightサイドメニュー -->
-            <div class="rightside-menu">
-                <div>{ MyCalendar.get_week_names }</div>
-            </div>
+            {% block content %}{% endblock %}
         </div>
         <!-- フッター -->
         <footer class="py-4 bg-dark text-center">

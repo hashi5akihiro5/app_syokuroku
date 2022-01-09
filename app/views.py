@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from .models import *
 from .forms import *
+from .mixins import BaseCalendarMixin, MonthCalendarMixin
 
 
 class IndexView(View):
@@ -11,7 +12,8 @@ class IndexView(View):
             'profile_data': profile_data.order_by("-id")[0],
             'kcalselectform': KcalSelectForm(),
             'form': MuneCreateForm(),
-            'formset': PostCreateFormSet()
+            'formset': PostCreateFormSet(),
+            'month_calendar': MonthCalendarMixin().get_month_calendar,
         }
 
     def get(self, request):

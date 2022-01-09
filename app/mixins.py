@@ -1,16 +1,22 @@
 import datetime
 import calendar
 from collections import deque
+from .models import Post
 
 
 class BaseCalendarMixin:
     """カレンダー関連Mixinの基底クラス"""
-    today_date = Post.date
+    today_date = datetime.date.today()
     first_weekday = 0
     week_names = ['月', '火', '水', '木', '金', '土', '日']
 
-    def setup_calendar(self):
-        """内部カレンダーの設定処理"""
+    def setup_calendar(self, *args):
+        """内部カレンダーの設定処理
+        calendar.Calendarクラスの機能を利用するため、インスタンス化する。
+        Calendarクラスのmonthdatescaledarメソッドを利用していますが、
+        デフォルトが月曜日からで、火曜日から表示したい(first_weekday=1),
+        といったケースに対応するためのセットアップ処理です。
+        """
         self._calendar = calendar.Calendar(self.first_weekday)
 
     def get_week_names(self):
@@ -21,7 +27,6 @@ class BaseCalendarMixin:
 
 class MonthCalendarMixin(BaseCalendarMixin):
     """月間カレンダーの機能を提供するMixin"""
-
     def get_previous_month(self,date):
         """前月を返す"""
         if date.month == 1:
@@ -42,12 +47,12 @@ class MonthCalendarMixin(BaseCalendarMixin):
     
     def get_current_month(self):
         """現在の月を返す"""
-        month = self.kwargs.get('month')
-        year = self.kwargs.get('year')
+        year = self.today_date.year
+        month = self.today_date.month
         if month and year:
-            month = datetime.date(year=int(year), month=int(month), day=1)
+            month = datetime.date(year=year, month=month, day=1)
         else:
-            month = datetime.date.today().replace(day=1)
+            month = datetime.date.today()
         return month
 
     def get_month_calendar(self):
@@ -58,8 +63,8 @@ class MonthCalendarMixin(BaseCalendarMixin):
             'now': datetime.date.today(),
             'month_days': self.get_month_days(current_month),
             'month_current': current_month,
-            'month_previous': self.get_previous_month(current_month),
-            'month_next': self.get_next_month(current_month),
+            #'month_previous': self.get_previous_month(current_month),
+            #'month_next': self.get_next_month(current_month),
             'week_names': self.get_week_names(),
         }
         return calendar_data
