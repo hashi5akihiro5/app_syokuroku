@@ -1,0 +1,18 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1> Sign Up</h1>
+    <div class="form-bottom">
+        <form method='POST' role="form" action="" class="login-form">
+            {% csrf_token%}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+        <style>
+            #hint_id_username,
+            #hint_id_password1{
+                display: none;
+            }
+        </style>
+    </div>
+{% endblock content %}

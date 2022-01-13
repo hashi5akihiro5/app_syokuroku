@@ -32,14 +32,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'app.apps.AppConfig',# 追加
+    'account.apps.AccountConfig', # 追加
+    'widget_tweaks',# 追加
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',# 追加
-    'app',# 追加
+    'crispy_forms', # 追加
+    'crispy_bootstrap5', # 追加
 ]
 
 MIDDLEWARE = [
@@ -71,8 +74,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'syokuroku.wsgi.application'
-
-LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -131,3 +132,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+CRISPY_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'index'

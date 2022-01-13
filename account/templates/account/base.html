@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}}</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
+        <!-- static/css fail -->
+        <!-- 独自のcssファイルが効かない 調査する -->
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
+    </head>
+    <body class="container">
+        <nav class="navbar navbar-expand navbar-right bg-light">
+            <h1 class="Logo text-warning">食 録</h1>
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'index' %]">Home</a></li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <li><a href="#">Profile</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="container-fluid">
+            {% block content %}{% endblock %}
+        </div>
+        <!-- フッター -->
+        <footer class="py-4 bg-dark text-center">
+            <small class="text-white">&copy; SYOKU ROKU</small>
+        </footer>
+        <!-- Optional Script -->
+        <!-- Popper.js, then Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+        {% block extrajs %}{% endblock %}
+    </body>
+</html>
