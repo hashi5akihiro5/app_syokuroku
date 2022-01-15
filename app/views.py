@@ -1,3 +1,4 @@
+from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
 from django.views import View
 from .models import *
@@ -25,15 +26,5 @@ class IndexView(View):
         self.params['formset'] = PostCreateFormSet(request.POST)
         return render(request, 'app/index.html', self.params)
 
-# Register
-def register(request):
-    if (request.method == 'POST'):
-        obj = Profile()
-        register_data = RegisterForm(request.POST, instance=obj)
-        register_data.save()
-        return redirect(to='/app')
-    params = {
-        'form': RegisterForm(),
-    }
-    return render(request, 'app/register.html', params)
-
+def home(request):
+    return render(request, 'app/home.html')
