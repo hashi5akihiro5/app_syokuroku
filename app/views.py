@@ -27,4 +27,7 @@ class IndexView(View):
         return render(request, 'app/index.html', self.params)
 
 def home(request):
-    return render(request, 'app/home.html')
+    params = {
+        'kcalselectform': KcalSelectForm(),
+    }
+    return render(request, 'app/home.html', params)
